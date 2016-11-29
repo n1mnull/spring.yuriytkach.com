@@ -9,14 +9,16 @@
     <version>1.0-SNAPSHOT</version>
 
     <properties>
-            <spring.ver>3.2.13.RELEASE</spring.ver>
+        <!--<spring.ver>4.3.3.RELEASE</spring.ver>-->
+        <commons.io.version>2.4</commons.io.version>
+        <spring.ver>3.2.13.RELEASE</spring.ver>
     </properties>
 
     <dependencies>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
-            <version>${spring.ver}</version>
+            <version>4.3.3.RELEASE</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
@@ -24,17 +26,21 @@
             <version>${spring.ver}</version>
         </dependency>
         <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context-tx</artifactId>
-            <version>${spring.ver}</version>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-context-tx</artifactId>
+        <version>${spring.ver}</version>
         </dependency>
         <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context-jdbc</artifactId>
-            <version>${spring.ver}</version>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-context-jdbc</artifactId>
+        <version>${spring.ver}</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>${commons.io.version}</version>
         </dependency>
     </dependencies>
-
 
 
 </project>
