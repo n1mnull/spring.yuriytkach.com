@@ -1,8 +1,9 @@
 package beans;
 
-import java.util.concurrent.atomic.AtomicInteger;
-import java.util.Date;
 import java.text.DateFormat;
+import java.time.LocalTime;
+import java.util.Date;
+import java.util.concurrent.atomic.AtomicInteger;
 
 
 public class Event {
@@ -20,6 +21,11 @@ public class Event {
 
     this.date = date;
     this.dateFormat = df;
+  }
+
+  public static boolean isDay(int start, int end) {
+    LocalTime time = LocalTime.now();
+    return time.getHour() > start && time.getHour() < end;
   }
 
   public String getMsg() {

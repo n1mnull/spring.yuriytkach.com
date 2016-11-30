@@ -7,7 +7,7 @@ import java.io.IOException;
 
 import beans.Event;
 
-public class FileEventLogger implements EventLogger {
+public class FileEventLogger extends AbstractLogger {
 
   private File file;
   private String filename;
