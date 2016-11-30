@@ -25,13 +25,16 @@ public class App {
     ConfigurableApplicationContext ctx = new ClassPathXmlApplicationContext("spring.xml");
     App app = (App) ctx.getBean("app");
 
-    Event event= ctx.getBean(Event.class);
+    Client client = ctx.getBean(Client.class);
+    System.out.println("Client says: " + client.getGreeting());
+
+    Event event = ctx.getBean(Event.class);
     app.logEvent(EventType.INFO, event, "Some event for 1");
 
-    event= ctx.getBean(Event.class);
+    event = ctx.getBean(Event.class);
     app.logEvent(EventType.ERROR, event, "Some event for 2");
 
-    event= ctx.getBean(Event.class);
+    event = ctx.getBean(Event.class);
     app.logEvent(null, event, "Some event for 3");
 
     ctx.close();
