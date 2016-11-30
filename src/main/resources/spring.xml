@@ -10,6 +10,7 @@
                 http://www.springframework.org/schema/util
                 http://www.springframework.org/schema/util/spring-util-3.2.xsd">
 
+    <import resource="aspects.xml" />
     <import resource="loggers.xml"/>
 
     <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
@@ -40,7 +41,7 @@
         <constructor-arg ref="loggerMap"/>
 
         <property name="startupMessage" value="#{'Hello user ' +
-            ( systemProperties['os.arch'].equals('x86') ?
+            ( systemProperties['os.name'].contains('Windows') ?
                 systemEnvironment['USERNAME'] : systemEnvironment['USER'] ) +
                 '. Default logger is ' + app.defaultLogger.name }"/>
     </bean>

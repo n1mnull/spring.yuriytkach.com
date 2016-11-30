@@ -24,15 +24,14 @@
         <property name="name" value="#{fileEventLogger.name + ' with cache'}"/>
     </bean>
 
+    <util:list id="combinedLoggersList">
+        <ref bean="consoleEventLogger"/>
+        <ref bean="fileEventLogger"/>
+    </util:list>
+
     <bean id="combinedEventLogger" class="loggers.CombinedEventLogger">
-        <constructor-arg>
-            <list>
-                <ref bean="consoleEventLogger"/>
-                <ref bean="fileEventLogger"/>
-            </list>
-        </constructor-arg>
-        <property name="name"
-                  value="#{'Combined ' + combinedEventLogger.loggers.![name].toString()}"/>
+        <constructor-arg ref="combinedLoggersList"/>
+        <property name="name" value="#{'Combined + combinedLoggersList.![name].toString()'}"/>
     </bean>
 
 </beans>
