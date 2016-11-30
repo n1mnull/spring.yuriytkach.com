@@ -3,6 +3,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.util.Map;
 
+import aspects.StatisticsAspect;
 import beans.Client;
 import beans.Event;
 import beans.EventType;
@@ -14,6 +15,7 @@ public class App {
   private EventLogger defaultLogger;
   private Map<EventType, EventLogger> loggers;
   private String startupMessage;
+  private StatisticsAspect statisticsAspect;
 
   public App(Client client, EventLogger eventLogger, Map<EventType, EventLogger> loggers) {
     this.client = client;
@@ -40,6 +42,8 @@ public class App {
     event = ctx.getBean(Event.class);
     app.logEvent(null, event, "Some event for 3");
 
+    app.outputLoggingCounter();
+
     ctx.close();
   }
 
@@ -51,6 +55,19 @@ public class App {
       logger = defaultLogger;
     }
     logger.logEvent(event);
+  }
+
+  private void outputLoggingCounter() {
+    if (statisticsAspect != null) {
+      System.out.println("Loggers statistics. Number of calls: ");
+      for (Map.Entry<Class<?>, Integer> entry : statisticsAspect.getCounter().entrySet()) {
+        System.out.println("    " + entry.getKey().getSimpleName() + ": " + entry.getValue());
+      }
+    }
+  }
+
+  public void setStatisticsAspect(StatisticsAspect statisticsAspect) {
+    this.statisticsAspect = statisticsAspect;
   }
 
   public void setStartupMessage(String startupMessage) {

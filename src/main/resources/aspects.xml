@@ -16,5 +16,6 @@
     <aop:aspectj-autoproxy/>
 
     <bean id="loggingAspect" class="aspects.LoggingAspect"/>
+    <bean id="statisticsAspect" class="aspects.StatisticsAspect"/>
 
 </beans>
