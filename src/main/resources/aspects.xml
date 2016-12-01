@@ -18,4 +18,24 @@
     <bean id="loggingAspect" class="aspects.LoggingAspect"/>
     <bean id="statisticsAspect" class="aspects.StatisticsAspect"/>
 
+    <bean id="consoleLoggerLimitAspect"
+          class="aspects.ConsoleLoggerLimitAspect">
+        <constructor-arg
+                value="${console.logger.max:2}"/> <!-- take value from properties, if not found, then default is 2 -->
+        <constructor-arg ref="fileEventLogger"/>
+    </bean>
+
+    <aop:config>
+        <aop:aspect id="consoleLimitAspect" ref="consoleLoggerLimitAspect">
+
+            <aop:pointcut id="consoleLogging"
+                          expression="execution(* *.logEvent(beans.Event))
+                    &amp;&amp; within(loggers.ConsoleEventLogger)
+                    &amp;&amp; args(evt)"/>
+
+            <aop:around pointcut-ref="consoleLogging" method="aroundLogEvent" arg-names="evt"/>
+        </aop:aspect>
+
+    </aop:config>
+
 </beans>
